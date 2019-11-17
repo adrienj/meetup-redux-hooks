@@ -9,8 +9,9 @@ export const useOpenedItem = (resource: ResourceType, item: Comment | Post) => {
     const dispatch = useDispatch();
 
     const itemId = item.id;
-    const openItem = useCallback(() => dispatch(setOpenedItem({ resource: ResourceType.comments, id: itemId })), [
+    const openItem = useCallback(() => dispatch(setOpenedItem({ resource, id: itemId })), [
         dispatch,
+        resource,
         itemId
     ]);
 

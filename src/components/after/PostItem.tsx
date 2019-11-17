@@ -8,7 +8,7 @@ interface OwnProps {
     post: Post;
 }
 
-export const PostItem = ({ post }: OwnProps) => {
+export const PostItem = React.memo(({ post }: OwnProps) => {
     const { openItem, selected } = useOpenedItem(ResourceType.posts, post);
 
     return (
@@ -22,4 +22,4 @@ export const PostItem = ({ post }: OwnProps) => {
             <p>{post.body.slice(0, 10).trim()}...</p>
         </li>
     );
-};
+});

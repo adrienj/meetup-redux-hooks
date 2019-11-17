@@ -8,7 +8,7 @@ interface OwnProps {
     comment: Comment;
 }
 
-export const CommentItem = ({ comment }: OwnProps) => {
+export const CommentItem = React.memo(({ comment }: OwnProps) => {
     const { openItem, selected } = useOpenedItem(ResourceType.comments, comment);
 
     return (
@@ -22,4 +22,4 @@ export const CommentItem = ({ comment }: OwnProps) => {
             <span>by {comment.name}</span>
         </li>
     );
-};
+});

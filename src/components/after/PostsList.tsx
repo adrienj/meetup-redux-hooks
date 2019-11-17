@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { getPosts } from '../../store/data/index';
 import { PostItem } from './PostItem';
 
-export const PostsList = () => {
+export const PostsList = React.memo(() => {
     const posts = useSelector(getPosts);
 
     return (
@@ -13,4 +13,4 @@ export const PostsList = () => {
             ))}
         </ul>
     );
-};
+});

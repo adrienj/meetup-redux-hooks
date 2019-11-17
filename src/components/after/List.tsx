@@ -10,7 +10,7 @@ const resourceLists = {
     [ResourceType.comments]: CommentsList
 };
 
-export const List = () => {
+export const List = React.memo(() => {
     const resource = useSelector(getResource);
     const dispatch = useDispatch();
     const onChange = useCallback(e => dispatch(setResource(e.target.value as ResourceType)), [dispatch]);
@@ -29,4 +29,4 @@ export const List = () => {
             <ResourceList />
         </div>
     );
-};
+});

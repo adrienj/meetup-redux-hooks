@@ -39,12 +39,23 @@ p {
 
 .comment-item,
 .post-item {
-    background: #ddd;
+    background: #bbb;
     padding: 10px;
     margin: 10px 0;
+    cursor: pointer;
 }
 
-.comment-item span {
+.comment-item:hover,
+.post-item:hover {
+    background: #ccc;
+}
+
+.comment-item.selected,
+.post-item.selected {
+    background: #ddd;
+}
+
+span {
     font-size: 11px;
     opacity: 0.5;
     text-align: right;

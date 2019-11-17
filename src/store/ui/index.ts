@@ -44,7 +44,7 @@ export const SET_RESOURCE = 'SET_RESOURCE' as const;
 export const SET_OPENED_ITEM = 'SET_OPENED_ITEM' as const;
 
 export const setResource = (payload: ResourceType) => ({ type: SET_RESOURCE, payload });
-export const setOpenedItem = (payload: OpenedItem) => ({ type: SET_OPENED_ITEM, payload });
+export const setOpenedItem = (payload: OpenedItem | null) => ({ type: SET_OPENED_ITEM, payload });
 
 // Selectors
 

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { getComments } from '../../store/data/index';
 import { CommentItem } from './CommentItem';
 
-export const CommentsList = () => {
+export const CommentsList = React.memo(() => {
     const comments = useSelector(getComments);
 
     return (
@@ -13,4 +13,4 @@ export const CommentsList = () => {
             ))}
         </ul>
     );
-};
+});
