@@ -1,0 +1,1 @@
+export type ActionType<T extends (...args: any) => any> = ReturnType<T>['type'];
