@@ -1,28 +1,21 @@
-import React, { useCallback } from 'react';
-import { getOpenedItem, ResourceType, setOpenedItem } from '../../store/ui/index';
+import React from 'react';
+import { ResourceType } from '../../store/ui/index';
 import classNames from 'classnames';
 import { Post } from '../../store/data/index';
-import { useSelector, useDispatch } from 'react-redux';
+import { useOpenedItem } from './useOpenedItem';
 
 interface OwnProps {
     post: Post;
 }
 
 export const PostItem = ({ post }: OwnProps) => {
-    const openedItem = useSelector(getOpenedItem);
-    const dispatch = useDispatch();
-
-    const postId = post.id;
-    const openItem = useCallback(() => dispatch(setOpenedItem({ resource: ResourceType.posts, id: postId })), [
-        dispatch,
-        postId
-    ]);
+    const { openItem, selected } = useOpenedItem(ResourceType.posts, post);
 
     return (
         <li
             onClick={openItem}
             className={classNames('post-item', {
-                selected: openedItem && openedItem.resource === ResourceType.posts && openedItem.id === post.id
+                selected
             })}
         >
             <h3>{post.title}</h3>
