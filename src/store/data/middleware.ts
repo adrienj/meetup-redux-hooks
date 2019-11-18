@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { SET_RESOURCE, ResourceType, getResource } from '../ui/index';
-import { setPosts, Post, Comment, setComments } from './index';
+import { setPosts, Post, Comment, setComments, setIsLoading } from './index';
 
 export const DataMiddleware = (store: any) => {
     const getData = () => {
         const resource = getResource(store.getState());
         
+        store.dispatch(setIsLoading());
         axios.get('https://jsonplaceholder.typicode.com/' + resource).then(response => {
             if (resource === ResourceType.posts) {
                 store.dispatch(setPosts(response.data as Post[]));
@@ -15,12 +16,10 @@ export const DataMiddleware = (store: any) => {
         });
     };
 
-    getData();
-
     return (next: any) => (action: any) => {
         const result = next(action);
 
-        if (action.type === SET_RESOURCE) {
+        if (action.type === SET_RESOURCE || action.type === '@@INIT') {
             getData();
         }
 

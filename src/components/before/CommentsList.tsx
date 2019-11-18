@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { StoreState } from '../../store';
 import { Comment } from '../../store/data';
 import { getComments } from '../../store/data/index';
-import CommentItem from './CommentItemContainer';
+import CommentItem from './3.CommentItemContainer';
 
 interface StateProps {
     comments: Comment[];

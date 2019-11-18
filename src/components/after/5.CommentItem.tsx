@@ -2,7 +2,7 @@ import React from 'react';
 import { ResourceType } from '../../store/ui/index';
 import classNames from 'classnames';
 import { Comment } from '../../store/data/index';
-import { useOpenedItem } from './useOpenedItem';
+import { useOpenedItem } from './6.useOpenedItem';
 
 interface OwnProps {
     comment: Comment;

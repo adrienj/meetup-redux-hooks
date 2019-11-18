@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { CommentItem, CommentItemStateProps, CommentItemDispatchProps, CommentItemOwnProps } from './CommentItem';
+import { CommentItem, CommentItemStateProps, CommentItemDispatchProps, CommentItemOwnProps } from './2.CommentItem';
 import { StoreState } from '../../store';
 import { getOpenedItem, setOpenedItem, ResourceType } from '../../store/ui';
 import { Dispatch } from 'react';

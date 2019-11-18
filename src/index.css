@@ -39,7 +39,7 @@ p {
 
 .comment-item,
 .post-item {
-    background: #bbb;
+    background: #eee;
     padding: 10px;
     margin: 10px 0;
     cursor: pointer;
@@ -52,7 +52,7 @@ p {
 
 .comment-item.selected,
 .post-item.selected {
-    background: #ddd;
+    background: #aaa;
 }
 
 span {

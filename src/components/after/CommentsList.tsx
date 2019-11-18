@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { getComments } from '../../store/data/index';
-import { CommentItem } from './CommentItem';
+import { CommentItem } from './5.CommentItem';
 
 export const CommentsList = React.memo(() => {
     const comments = useSelector(getComments);

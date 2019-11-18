@@ -20,3 +20,5 @@ const reducers = combineReducers<StoreState>({
 });
 
 export const store = createStore(reducers, initialState, composeWithDevTools(applyMiddleware(DataMiddleware)));
+
+store.dispatch({type: '@@INIT'});
