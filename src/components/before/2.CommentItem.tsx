@@ -21,7 +21,7 @@ export const CommentItem = ({ openedItem, comment, openItem }: Props) => (
     <li
         onClick={openItem}
         className={classNames('comment-item', {
-            selected: openedItem && openedItem.resource === ResourceType.comments && openedItem.id === comment.id
+            opened: openedItem && openedItem.resource === ResourceType.comments && openedItem.id === comment.id
         })}
     >
         <p>{comment.body.slice(0, 10).trim()}...</p>

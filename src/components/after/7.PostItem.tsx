@@ -9,13 +9,13 @@ interface OwnProps {
 }
 
 export const PostItem = React.memo(({ post }: OwnProps) => {
-    const { openItem, selected } = useOpenedItem(ResourceType.posts, post);
+    const { openItem, opened } = useOpenedItem(ResourceType.posts, post);
 
     return (
         <li
             onClick={openItem}
             className={classNames('post-item', {
-                selected
+                opened
             })}
         >
             <h3>{post.title}</h3>

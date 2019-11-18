@@ -15,7 +15,7 @@ export const useOpenedItem = (resource: ResourceType, item: Comment | Post) => {
         itemId
     ]);
 
-    const selected = openedItem && openedItem.resource === resource && openedItem.id === itemId;
+    const opened = openedItem && openedItem.resource === resource && openedItem.id === itemId;
 
-    return { openItem, selected };
+    return { openItem, opened };
 };

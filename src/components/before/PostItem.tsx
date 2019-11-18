@@ -24,7 +24,7 @@ const PostItem = ({ openedItem, post, openItem }: Props) => (
     <li
         onClick={openItem}
         className={classNames('post-item', {
-            selected: openedItem && openedItem.resource === ResourceType.posts && openedItem.id === post.id
+            opened: openedItem && openedItem.resource === ResourceType.posts && openedItem.id === post.id
         })}
     >
         <h3>{post.title}</h3>

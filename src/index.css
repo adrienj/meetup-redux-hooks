@@ -50,8 +50,8 @@ p {
     background: #ccc;
 }
 
-.comment-item.selected,
-.post-item.selected {
+.comment-item.opened,
+.post-item.opened {
     background: #aaa;
 }
 

@@ -9,13 +9,13 @@ interface OwnProps {
 }
 
 export const CommentItem = React.memo(({ comment }: OwnProps) => {
-    const { openItem, selected } = useOpenedItem(ResourceType.comments, comment);
+    const { openItem, opened } = useOpenedItem(ResourceType.comments, comment);
 
     return (
         <li
             onClick={openItem}
             className={classNames('comment-item', {
-                selected
+                opened
             })}
         >
             <p>{comment.body.slice(0, 10).trim()}...</p>
