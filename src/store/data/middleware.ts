@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { SET_RESOURCE, ResourceType, getResource } from '../ui/index';
+import { SET_RESOURCE, ResourceType, getResourceType } from '../ui/index';
 import { setPosts, Post, Comment, setComments, setIsLoading } from './index';
 
 export const DataMiddleware = (store: any) => {
     const getData = () => {
-        const resource = getResource(store.getState());
+        const resource = getResourceType(store.getState());
         
         store.dispatch(setIsLoading());
         axios.get('https://jsonplaceholder.typicode.com/' + resource).then(response => {

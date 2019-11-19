@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getResource, setResource } from '../../store/ui';
+import { getResourceType, setResourceType } from '../../store/ui';
 import { ResourceType } from '../../store/ui/index';
 import { PostsList } from './PostsList';
 import { CommentsList } from './CommentsList';
@@ -11,20 +11,20 @@ const resourceListComponents = {
     [ResourceType.comments]: CommentsList
 };
 
-export const List = React.memo(() => {
-    const resource = useSelector(getResource);
+export const List = () => {
+    const resourceType = useSelector(getResourceType);
     const isLoading = useSelector(getIsLoading);
     const dispatch = useDispatch();
 
     const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        dispatch(setResource(e.target.value as ResourceType));
+        dispatch(setResourceType(e.target.value as ResourceType));
     };
 
-    const ResourceList = resourceListComponents[resource];
+    const ResourceList = resourceListComponents[resourceType];
 
     return (
-        <div>
-            <select onChange={onChange} value={resource}>
+        <div className="list">
+            <select onChange={onChange} value={resourceType}>
                 {Object.keys(ResourceType).map(res => (
                     <option key={res} value={res}>
                         {res}
@@ -34,4 +34,4 @@ export const List = React.memo(() => {
             {isLoading ? <h2>Loading...</h2> : <ResourceList />}
         </div>
     );
-});
+};

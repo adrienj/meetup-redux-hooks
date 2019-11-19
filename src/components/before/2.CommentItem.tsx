@@ -12,16 +12,16 @@ export interface CommentItemStateProps {
 }
 
 export interface CommentItemDispatchProps {
-    openItem: () => void;
+    toggleOpenItem: () => void;
 }
 
 type Props = CommentItemOwnProps & CommentItemStateProps & CommentItemDispatchProps;
 
-export const CommentItem = ({ openedItem, comment, openItem }: Props) => (
+export const CommentItem = ({ openedItem, comment, toggleOpenItem }: Props) => (
     <li
-        onClick={openItem}
+        onClick={toggleOpenItem}
         className={classNames('comment-item', {
-            opened: openedItem && openedItem.resource === ResourceType.comments && openedItem.id === comment.id
+            opened: openedItem && openedItem.resourceType === ResourceType.comments && openedItem.id === comment.id
         })}
     >
         <p>{comment.body.slice(0, 10).trim()}...</p>

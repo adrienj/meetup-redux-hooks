@@ -2,18 +2,18 @@ import React, { ChangeEvent } from 'react';
 import { connect } from 'react-redux';
 import { StoreState } from '../../store';
 import { Dispatch, AnyAction } from 'redux';
-import { getResource, setResource } from '../../store/ui';
-import { ResourceType } from '../../store/ui/index';
+import { ResourceType, getResourceType, setResourceType } from '../../store/ui/index';
 import PostsList from './PostsList';
 import CommentsList from './CommentsList';
 import { getIsLoading } from '../../store/data';
 
 interface StateProps {
-    resource: ResourceType;
+    resourceType: ResourceType;
     isLoading: boolean;
 }
+
 interface DispatchProps {
-    setResource: (resource: ResourceType) => void;
+    setResourceType: (resource: ResourceType) => void;
 }
 
 type Props = StateProps & DispatchProps;
@@ -23,16 +23,16 @@ const resourceListComponents = {
     [ResourceType.comments]: CommentsList
 };
 
-const List = ({ isLoading, resource, setResource }: Props) => {
-    const ResourceList = resourceListComponents[resource];
+const List = ({ isLoading, resourceType, setResourceType }: Props) => {
+    const ResourceList = resourceListComponents[resourceType];
 
     return (
-        <div>
+        <div className="list">
             <select
                 onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                    setResource(e.target.value as ResourceType);
+                    setResourceType(e.target.value as ResourceType);
                 }}
-                value={resource}
+                value={resourceType}
             >
                 {Object.keys(ResourceType).map(res => (
                     <option key={res} value={res}>
@@ -46,12 +46,12 @@ const List = ({ isLoading, resource, setResource }: Props) => {
 };
 
 const mapState = (state: StoreState): StateProps => ({
-    resource: getResource(state),
+    resourceType: getResourceType(state),
     isLoading: getIsLoading(state)
 });
 
-const mapDispatch = (dispatch: Dispatch<AnyAction>): DispatchProps => ({
-    setResource: (resource: ResourceType) => dispatch(setResource(resource))
+const mapDispatch = (dispatch: Dispatch<AnyAction>):DispatchProps => ({
+    setResourceType: (resourceType: ResourceType) => dispatch(setResourceType(resourceType))
 });
 
 export default connect(mapState, mapDispatch)(List);

@@ -8,12 +8,12 @@ interface OwnProps {
     comment: Comment;
 }
 
-export const CommentItem = React.memo(({ comment }: OwnProps) => {
-    const { openItem, opened } = useOpenedItem(ResourceType.comments, comment);
+export const CommentItem = ({ comment }: OwnProps) => {
+    const { toggleOpenItem, opened } = useOpenedItem(ResourceType.comments, comment);
 
     return (
         <li
-            onClick={openItem}
+            onClick={toggleOpenItem}
             className={classNames('comment-item', {
                 opened
             })}
@@ -22,4 +22,4 @@ export const CommentItem = React.memo(({ comment }: OwnProps) => {
             <span>by {comment.name}</span>
         </li>
     );
-});
+};

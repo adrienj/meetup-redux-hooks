@@ -1,6 +1,6 @@
-import { createSelector } from 'reselect'; 
+import { createSelector } from 'reselect';
 import { StoreState } from '../index';
-import { getData } from '../data';
+import { getData, getPosts, getComments, Post, Comment } from '../data';
 import { AnyAction } from 'redux';
 
 export enum ResourceType {
@@ -8,7 +8,7 @@ export enum ResourceType {
     comments = 'comments'
 }
 export interface OpenedItem {
-    resource: ResourceType;
+    resourceType: ResourceType;
     id: number;
 }
 
@@ -16,23 +16,28 @@ export interface OpenedItem {
 
 export interface UiState {
     openedItem: OpenedItem | null;
-    resource: ResourceType;
+    resourceType: ResourceType;
 }
 
 export const uiInitialState: UiState = {
     openedItem: null,
-    resource: ResourceType.posts
+    resourceType: ResourceType.posts
 };
 
-export const uiReducer = (
-    state: UiState = uiInitialState,
-    action: AnyAction
-): UiState => {
+export const uiReducer = (state: UiState = uiInitialState, action: AnyAction): UiState => {
     switch (action.type) {
-        case SET_OPENED_ITEM:
-            return { ...state, openedItem: action.payload };
+        case TOGGLE_OPENED_ITEM:
+            return {
+                ...state,
+                openedItem:
+                    state.openedItem &&
+                    action.payload.id === state.openedItem.id &&
+                    action.payload.resourceType === state.openedItem.resourceType
+                        ? null
+                        : action.payload
+            };
         case SET_RESOURCE:
-            return { ...state, resource: action.payload };
+            return { ...state, resourceType: action.payload };
         default:
             return state;
     }
@@ -41,18 +46,31 @@ export const uiReducer = (
 // Actions
 
 export const SET_RESOURCE = 'SET_RESOURCE' as const;
-export const SET_OPENED_ITEM = 'SET_OPENED_ITEM' as const;
+export const TOGGLE_OPENED_ITEM = 'TOGGLE_OPENED_ITEM' as const;
 
-export const setResource = (payload: ResourceType) => ({ type: SET_RESOURCE, payload });
-export const setOpenedItem = (payload: OpenedItem | null) => ({ type: SET_OPENED_ITEM, payload });
+export const setResourceType = (payload: ResourceType) => ({ type: SET_RESOURCE, payload });
+export const toggleOpenedItem = (payload: OpenedItem | null) => ({ type: TOGGLE_OPENED_ITEM, payload });
 
 // Selectors
 
-export const getResource = (state: StoreState) => state.ui.resource;
+export const getResourceType = (state: StoreState) => state.ui.resourceType;
 export const getOpenedItem = (state: StoreState) => state.ui.openedItem;
 
-export const getOpenedListData = createSelector(
-    getResource,
-    getData,
-    (resource, data) => data[resource]
+export const getOpenedItemData = createSelector(
+    getPosts,
+    getComments,
+    getOpenedItem,
+    (posts, comments, openedItem) =>
+        (openedItem &&
+            ((openedItem.resourceType === ResourceType.posts ? posts : comments) as (Post | Comment)[]).find(
+                d => d.id === openedItem.id
+            )) ||
+        null
 );
+
+export const getOpenedItemResourceType = createSelector(
+    getOpenedItem,
+    openedItem => openedItem && openedItem.resourceType
+);
+
+export const getOpenedListData = createSelector(getResourceType, getData, (resourceType, data) => data[resourceType]);

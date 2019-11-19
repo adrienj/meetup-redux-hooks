@@ -5,11 +5,9 @@ import { Comment } from '../../store/data';
 import { getComments } from '../../store/data/index';
 import CommentItem from './3.CommentItemContainer';
 
-interface StateProps {
+interface Props {
     comments: Comment[];
 }
-
-type Props = StateProps;
 
 const CommentsList = ({ comments }: Props) => (
     <ul>
@@ -19,7 +17,7 @@ const CommentsList = ({ comments }: Props) => (
     </ul>
 );
 
-const mapState = (state: StoreState): StateProps => ({
+const mapState = (state: StoreState) => ({
     comments: getComments(state)
 });
 

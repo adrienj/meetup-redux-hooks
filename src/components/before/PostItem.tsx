@@ -1,5 +1,5 @@
 import React from 'react';
-import { getOpenedItem, OpenedItem, ResourceType, setOpenedItem } from '../../store/ui/index';
+import { getOpenedItem, OpenedItem, ResourceType, toggleOpenedItem } from '../../store/ui/index';
 import { StoreState } from '../../store';
 import classNames from 'classnames';
 import { Post } from '../../store/data/index';
@@ -15,16 +15,16 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    openItem: () => void;
+    toggleOpenItem: () => void;
 }
 
 type Props = OwnProps & StateProps & DispatchProps;
 
-const PostItem = ({ openedItem, post, openItem }: Props) => (
+const PostItem = ({ openedItem, post, toggleOpenItem }: Props) => (
     <li
-        onClick={openItem}
+        onClick={toggleOpenItem}
         className={classNames('post-item', {
-            opened: openedItem && openedItem.resource === ResourceType.posts && openedItem.id === post.id
+            opened: openedItem && openedItem.resourceType === ResourceType.posts && openedItem.id === post.id
         })}
     >
         <h3>{post.title}</h3>
@@ -36,7 +36,7 @@ const mapState = (state: StoreState): StateProps => ({
     openedItem: getOpenedItem(state)
 });
 const mapDispatch = (dispatch: Dispatch<AnyAction>, ownProps: OwnProps): DispatchProps => ({
-    openItem: () => dispatch(setOpenedItem({resource: ResourceType.posts, id: ownProps.post.id}))
+    toggleOpenItem: () => dispatch(toggleOpenedItem({resourceType: ResourceType.posts, id: ownProps.post.id}))
 });
 
 export default connect(mapState, mapDispatch)(PostItem);

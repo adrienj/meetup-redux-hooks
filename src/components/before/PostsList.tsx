@@ -5,11 +5,9 @@ import { Post } from '../../store/data';
 import { getPosts } from '../../store/data/index';
 import PostItem from './PostItem';
 
-interface StateProps {
+interface Props {
     posts: Post[];
 }
-
-type Props = StateProps;
 
 const PostsList = ({ posts }: Props) => {
     return (
@@ -19,7 +17,7 @@ const PostsList = ({ posts }: Props) => {
     );
 };
 
-const mapState = (state: StoreState): StateProps => ({
+const mapState = (state: StoreState) => ({
     posts: getPosts(state)
 });
 
