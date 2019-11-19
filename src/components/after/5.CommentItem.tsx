@@ -4,11 +4,11 @@ import classNames from 'classnames';
 import { Comment } from '../../store/data/index';
 import { useOpenedItem } from './6.useOpenedItem';
 
-interface OwnProps {
+interface Props {
     comment: Comment;
 }
 
-export const CommentItem = ({ comment }: OwnProps) => {
+export const CommentItem = ({ comment }: Props) => {
     const { toggleOpenItem, opened } = useOpenedItem(ResourceType.comments, comment);
 
     return (
